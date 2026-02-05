@@ -11,33 +11,44 @@
   <script src="./script.js" defer></script>
   <link rel="stylesheet" href="./styles.css">
 </head>
-
 <body>
-  <div class="container-fluid d-flex flex-column align-items-center gap-4">
-
+  <div class="">
     <h1 class="mt-4">HLS-Eval Benchmark</h1>
-
+    
     <div class="btn-group" role="group" id="datasetButtons">
-      <input type="radio" class="btn-check" name="dataset" id="main" checked>
-      <label class="btn btn-outline-dark" for="main">Main</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="dataflow">
-      <label class="btn btn-outline-dark" for="dataflow">Dataflow</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="loop_tile">
-      <label class="btn btn-outline-dark" for="loop_tile">Loop Tile</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="label">
-      <label class="btn btn-outline-dark" for="label">Label</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="fpx">
-      <label class="btn btn-outline-dark" for="fpx">FPX</label>
+      <input type="radio" class="btn-check" name="dataset" id="main-1" value="main-1" checked>
+      <label class="btn btn-outline-dark" for="main-1">Main pass@1</label>
+      
+      <input type="radio" class="btn-check" name="dataset" id="main-5" value="main-5">
+      <label class="btn btn-outline-dark" for="main-5">Main pass@5</label>
+      
+      <input type="radio" class="btn-check" name="dataset" id="dataflow-1" value="dataflow-1">
+      <label class="btn btn-outline-dark" for="dataflow-1">Dataflow pass@1</label>
+      
+      <input type="radio" class="btn-check" name="dataset" id="dataflow-5" value="dataflow-5">
+      <label class="btn btn-outline-dark" for="dataflow-5">Dataflow pass@5</label>
+      
+      <input type="radio" class="btn-check" name="dataset" id="loop_tile-1" value="loop_tile-1">
+      <label class="btn btn-outline-dark" for="loop_tile-1">Loop Tile pass@1</label>
+      
+      <input type="radio" class="btn-check" name="dataset" id="loop_tile-5" value="loop_tile-5">
+      <label class="btn btn-outline-dark" for="loop_tile-5">Loop Tile pass@5</label>
+      
+      <input type="radio" class="btn-check" name="dataset" id="label-1" value="label-1">
+      <label class="btn btn-outline-dark" for="label-1">Label pass@1</label>
+      
+      <input type="radio" class="btn-check" name="dataset" id="label-5" value="label-5">
+      <label class="btn btn-outline-dark" for="label-5">Label pass@5</label>
+      
+      <input type="radio" class="btn-check" name="dataset" id="fpx-1" value="fpx-1">
+      <label class="btn btn-outline-dark" for="fpx-1">FPX pass@1</label>
+      
+      <input type="radio" class="btn-check" name="dataset" id="fpx-5" value="fpx-5">
+      <label class="btn btn-outline-dark" for="fpx-5">FPX pass@5</label>
     </div>
-
+    
     <div id="bar-chart" class="chart-card"></div>
-
     <div id="line-chart" class="chart-card"></div>
   </div>
-
 </body>
 </html>

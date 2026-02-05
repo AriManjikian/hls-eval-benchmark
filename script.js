@@ -18,33 +18,21 @@ async function loadCSV(file) {
   });
 }
 
-async function renderBarChart(datasetKey) {
+async function renderBarChart(datasetKey, passK) {
   const data = await loadCSV(DATASETS[datasetKey]);
-
   const metrics = [...new Set(data.map(d => d.metric))];
   const models = [...new Set(data.map(d => d.model))];
 
   const series = models.map(model => {
-    const pass1Data = metrics.map(metric =>
-      data.find(d => d.model === model && d.metric === metric && d.k === 1)?.rate ?? 0
+    const passData = metrics.map(metric =>
+      data.find(d => d.model === model && d.metric === metric && d.k === passK)?.rate ?? 0
     );
-    const pass5Data = metrics.map(metric =>
-      data.find(d => d.model === model && d.metric === metric && d.k === 5)?.rate ?? 0
-    );
-
-    return [
-      {
-        name: `${model} (pass@1)`,
-        type: "bar",
-        data: pass1Data
-      },
-      {
-        name: `${model} (pass@5)`,
-        type: "bar",
-        data: pass5Data
-      }
-    ];
-  }).flat();
+    return {
+      name: model,
+      type: "bar",
+      data: passData
+    };
+  });
 
   barChart.setOption({
     tooltip: { trigger: "axis" },
@@ -68,33 +56,21 @@ async function renderBarChart(datasetKey) {
   });
 }
 
-async function renderLineChart(datasetKey) {
+async function renderLineChart(datasetKey, passK) {
   const data = await loadCSV(DATASETS[datasetKey]);
-
   const metrics = [...new Set(data.map(d => d.metric))];
   const models = [...new Set(data.map(d => d.model))];
 
   const series = models.map(model => {
-    const pass1Data = metrics.map(metric =>
-      data.find(d => d.model === model && d.metric === metric && d.k === 1)?.rate ?? 0
+    const passData = metrics.map(metric =>
+      data.find(d => d.model === model && d.metric === metric && d.k === passK)?.rate ?? 0
     );
-    const pass5Data = metrics.map(metric =>
-      data.find(d => d.model === model && d.metric === metric && d.k === 5)?.rate ?? 0
-    );
-
-    return [
-      {
-        name: `${model} (pass@1)`,
-        type: "line",
-        data: pass1Data
-      },
-      {
-        name: `${model} (pass@5)`,
-        type: "line",
-        data: pass5Data
-      }
-    ];
-  }).flat();
+    return {
+      name: model,
+      type: "line",
+      data: passData
+    };
+  });
 
   lineChart.setOption({
     tooltip: { trigger: "axis" },
@@ -118,12 +94,18 @@ async function renderLineChart(datasetKey) {
   });
 }
 
+function updateCharts() {
+  const selected = document.querySelector("input[name=dataset]:checked");
+  const [dataset, pass] = selected.value.split("-");
+  const passK = Number(pass);
+
+  renderBarChart(dataset, passK);
+  renderLineChart(dataset, passK);
+}
+
 document.querySelectorAll("input[name=dataset]").forEach(radio => {
-  radio.addEventListener("change", () => {
-    renderBarChart(radio.id);
-    renderLineChart(radio.id);
-  });
+  radio.addEventListener("change", updateCharts);
 });
 
-renderBarChart("main");
-renderLineChart("main");
+renderBarChart("main", 1);
+renderLineChart("main", 1);
