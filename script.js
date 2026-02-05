@@ -1,4 +1,3 @@
-const barChart = echarts.init(document.getElementById("bar-chart"));
 const lineChart = echarts.init(document.getElementById("line-chart"));
 
 const DATASETS = {
@@ -17,45 +16,6 @@ async function loadCSV(file) {
     return { model, metric, k: Number(k), rate: Number(rate) };
   });
 }
-
-async function renderBarChart(datasetKey, passK) {
-  const data = await loadCSV(DATASETS[datasetKey]);
-  const metrics = [...new Set(data.map(d => d.metric))];
-  const models = [...new Set(data.map(d => d.model))];
-
-  const series = models.map(model => {
-    const passData = metrics.map(metric =>
-      data.find(d => d.model === model && d.metric === metric && d.k === passK)?.rate ?? 0
-    );
-    return {
-      name: model,
-      type: "bar",
-      data: passData
-    };
-  });
-
-  barChart.setOption({
-    tooltip: { trigger: "axis" },
-    legend: {
-      data: series.map(s => s.name),
-      type: 'scroll',
-      bottom: 0
-    },
-    grid: { bottom: 120, top: 40 },
-    xAxis: {
-      type: "category",
-      data: metrics,
-      axisLabel: { rotate: 30, interval: 0 }
-    },
-    yAxis: {
-      type: "value",
-      min: 0,
-      max: 1
-    },
-    series: series
-  });
-}
-
 async function renderLineChart(datasetKey, passK) {
   const data = await loadCSV(DATASETS[datasetKey]);
   const metrics = [...new Set(data.map(d => d.metric))];
@@ -107,5 +67,4 @@ document.querySelectorAll("input[name=dataset]").forEach(radio => {
   radio.addEventListener("change", updateCharts);
 });
 
-renderBarChart("main", 1);
 renderLineChart("main", 1);
