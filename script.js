@@ -59,7 +59,6 @@ function updateCharts() {
   const [dataset, pass] = selected.value.split("-");
   const passK = Number(pass);
 
-  renderBarChart(dataset, passK);
   renderLineChart(dataset, passK);
 }
 
