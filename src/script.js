@@ -1,15 +1,24 @@
 const lineChart = echarts.init(document.getElementById("line-chart"));
 
+const METRIC_ORDER = [
+  "pass_parse",
+  "pass_compile",
+  "pass_tb",
+  "pass_synth_and_tb",
+  "pass_synth"
+];
+
 const DATASETS = {
-  main: "pass_rates_zero_shot_main.csv",
-  dataflow: "pass_rates_zero_shot_dataflow.csv",
-  loop_tile: "pass_rates_zero_shot_loop_tile.csv",
-  label: "pass_rates_zero_shot_label.csv",
-  fpx: "pass_rates_zero_shot_fpx.csv"
+  main: "pass_rates_gen_zero_shot__main.csv",
+  dataflow: "pass_rates_edit_zero_shot__dataflow.csv",
+  loop_tile: "pass_rates_edit_zero_shot__loop_tile.csv",
+  label: "pass_rates_edit_zero_shot__label.csv",
+  fpx: "pass_rates_edit_zero_shot__fpx.csv",
+  inference: "pass_rates_inference_training.csv",
 };
 
 async function loadCSV(file) {
-  const text = await fetch(`data/${file}`).then(r => r.text());
+  const text = await fetch(`../pass_rate_data/${file}`).then(r => r.text());
   const [header, ...rows] = text.trim().split("\n");
   return rows.map(r => {
     const [model, metric, k, rate] = r.split(",");
@@ -18,7 +27,9 @@ async function loadCSV(file) {
 }
 async function renderLineChart(datasetKey, passK) {
   const data = await loadCSV(DATASETS[datasetKey]);
-  const metrics = [...new Set(data.map(d => d.metric))];
+  const metrics = METRIC_ORDER.filter(m =>
+    data.some(d => d.metric === m)
+  );
   const models = [...new Set(data.map(d => d.model))];
 
   const series = models.map(model => {

@@ -5,6 +5,8 @@ Qwen/Qwen2.5-Coder-32B-Instruct,pass_parse,1,1.0
 Qwen/Qwen2.5-Coder-32B-Instruct,pass_parse,5,1.0
 Qwen/Qwen2.5-Coder-32B-Instruct,pass_synth,1,1.0
 Qwen/Qwen2.5-Coder-32B-Instruct,pass_synth,5,1.0
+Qwen/Qwen2.5-Coder-32B-Instruct,pass_synth_and_tb,1,1.0
+Qwen/Qwen2.5-Coder-32B-Instruct,pass_synth_and_tb,5,1.0
 Qwen/Qwen2.5-Coder-32B-Instruct,pass_tb,1,1.0
 Qwen/Qwen2.5-Coder-32B-Instruct,pass_tb,5,1.0
 deepseek-ai/DeepSeek-V3,pass_compile,1,1.0
@@ -13,6 +15,8 @@ deepseek-ai/DeepSeek-V3,pass_parse,1,1.0
 deepseek-ai/DeepSeek-V3,pass_parse,5,1.0
 deepseek-ai/DeepSeek-V3,pass_synth,1,1.0
 deepseek-ai/DeepSeek-V3,pass_synth,5,1.0
+deepseek-ai/DeepSeek-V3,pass_synth_and_tb,1,1.0
+deepseek-ai/DeepSeek-V3,pass_synth_and_tb,5,1.0
 deepseek-ai/DeepSeek-V3,pass_tb,1,1.0
 deepseek-ai/DeepSeek-V3,pass_tb,5,1.0
 meta-llama/Llama-3-70b-chat-hf,pass_compile,1,0.9071428571428571
@@ -21,6 +25,8 @@ meta-llama/Llama-3-70b-chat-hf,pass_parse,1,1.0
 meta-llama/Llama-3-70b-chat-hf,pass_parse,5,1.0
 meta-llama/Llama-3-70b-chat-hf,pass_synth,1,0.9071428571428571
 meta-llama/Llama-3-70b-chat-hf,pass_synth,5,0.9642857142857143
+meta-llama/Llama-3-70b-chat-hf,pass_synth_and_tb,1,0.9
+meta-llama/Llama-3-70b-chat-hf,pass_synth_and_tb,5,0.9285714285714286
 meta-llama/Llama-3-70b-chat-hf,pass_tb,1,0.9
 meta-llama/Llama-3-70b-chat-hf,pass_tb,5,0.9285714285714286
 meta-llama/Llama-3-8b-chat-hf,pass_compile,1,0.39285714285714285
@@ -29,5 +35,7 @@ meta-llama/Llama-3-8b-chat-hf,pass_parse,1,1.0
 meta-llama/Llama-3-8b-chat-hf,pass_parse,5,1.0
 meta-llama/Llama-3-8b-chat-hf,pass_synth,1,0.39285714285714285
 meta-llama/Llama-3-8b-chat-hf,pass_synth,5,0.39285714285714285
+meta-llama/Llama-3-8b-chat-hf,pass_synth_and_tb,1,0.39285714285714285
+meta-llama/Llama-3-8b-chat-hf,pass_synth_and_tb,5,0.39285714285714285
 meta-llama/Llama-3-8b-chat-hf,pass_tb,1,0.39285714285714285
 meta-llama/Llama-3-8b-chat-hf,pass_tb,5,0.39285714285714285
