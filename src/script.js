@@ -18,7 +18,7 @@ const DATASETS = {
 };
 
 async function loadCSV(file) {
-  const text = await fetch(`../pass_rate_data/${file}`).then(r => r.text());
+  const text = await fetch(`./pass_rate_data/${file}`).then(r => r.text());
   const [header, ...rows] = text.trim().split("\n");
   return rows.map(r => {
     const [model, metric, k, rate] = r.split(",");
