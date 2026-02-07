@@ -2,8 +2,8 @@ from pathlib import Path
 import pandas as pd
 from utils import compute_pass_rates
 
-RAW_DATA_DIR = Path("raw_data")
-OUTPUT_DIR = Path("pass_rate_data")
+RAW_DATA_DIR = Path("../raw_data")
+OUTPUT_DIR = Path("../src/pass_rate_data")
 
 OUTPUT_DIR.mkdir(exist_ok=True)
 
@@ -45,4 +45,3 @@ for folder in RAW_DATA_DIR.iterdir():
     df_pass_rates.to_csv(output_path, index=False)
 
     print(f"  → wrote {output_path}")
-
