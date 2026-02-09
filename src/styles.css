@@ -17,6 +17,20 @@ h1 {
   color: #555;
 }
 
+.btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.btn-container .btn {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
 .btn-group .btn {
   font-size: 0.85rem;
 }

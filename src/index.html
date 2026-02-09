@@ -15,9 +15,10 @@
 
 <body>
   <div class="container-fluid d-flex flex-column align-items-center gap-4">
+
     <h1 class="mt-4">HLS-Eval Benchmark</h1>
 
-    <div class="btn-group" role="group" id="datasetButtons">
+    <div class="btn-container" id="datasetButtons">
       <input type="radio" class="btn-check" name="dataset" id="main-1" value="main-1" checked>
       <label class="btn btn-outline-dark" for="main-1">Main pass@1</label>
 
@@ -48,16 +49,13 @@
       <input type="radio" class="btn-check" name="dataset" id="fpx-5" value="fpx-5">
       <label class="btn btn-outline-dark" for="fpx-5">FPX pass@5</label>
     </div>
-
     <div id="line-chart" class="chart-card"></div>
-
     <div style="margin: 20px 0; text-align: center;">
       <label for="sizeSlider" style="display: block; margin-bottom: 10px;">
         Max Model Size: <span id="sizeValue">671</span>B params
       </label>
       <input type="range" id="sizeSlider" style="width: 300px;" />
     </div>
-
     <div id="data-table" style="margin: 20px 0; overflow-x: auto;"></div>
   </div>
 </body>

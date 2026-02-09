@@ -1,6 +1,5 @@
 import { MODEL_INFO, getModelParams, getModelColor } from './models.js';
 
-const lineChart = echarts.init(document.getElementById("line-chart"));
 const METRIC_ORDER = [
   "pass_parse",
   "pass_compile",
@@ -51,9 +50,10 @@ async function loadCSV(file) {
   });
 }
 
-async function renderLineChart(datasetKey, passK) {
+async function getPreparedData(datasetKey, passK) {
   const config = DATASETS[datasetKey];
   const data = await loadCSV(config.file);
+
   const metrics = METRIC_ORDER.filter(m =>
     data.some(d => d.metric === m)
   );
@@ -63,29 +63,54 @@ async function renderLineChart(datasetKey, passK) {
   const sizeSlider = document.getElementById("sizeSlider");
   const maxSize = Number(sizeSlider.value);
 
-  const models = allModels.filter(model => {
-    const params = getModelParams(model);
-    return params <= maxSize;
-  });
+  const models = allModels
+    .map(model => {
+      const params = getModelParams(model);
+      if (params > maxSize) return null;
 
-  const series = models.map(model => {
-    const params = getModelParams(model);
-    const color = getModelColor(model);
-    const label = `${model} (${params}B)`;
-    const passData = metrics.map(metric =>
-      data.find(d => d.model === model && d.metric === metric && d.k === passK)?.rate ?? 0
-    );
-    return {
-      name: label,
-      rawModel: model,
-      type: "line",
-      data: passData,
-      itemStyle: { color: color },
-      lineStyle: { color: color },
-    };
-  });
+      const color = getModelColor(model);
+      const rates = metrics.map(metric =>
+        data.find(d =>
+          d.model === model &&
+          d.metric === metric &&
+          d.k === passK
+        )?.rate ?? 0
+      );
+
+      return {
+        model,
+        label: `${model} (${params}B)`,
+        params,
+        color,
+        rates,
+      };
+    })
+    .filter(Boolean);
+
+  return {
+    config,
+    metrics,
+    models,
+  };
+}
+
+async function renderLineChart(datasetKey, passK) {
+
+  const lineChart = echarts.init(document.getElementById("line-chart"));
+  const { config, metrics, models } = await getPreparedData(datasetKey, passK);
+
+
+  const series = models.map(m => ({
+    name: m.label,
+    rawModel: m.model,
+    type: "line",
+    data: m.rates,
+    itemStyle: { color: m.color },
+    lineStyle: { color: m.color },
+  }));
 
   const title = passK ? `${config.title} (pass@${passK})` : config.title;
+
   lineChart.setOption({
     title: {
       text: title,
@@ -117,22 +142,7 @@ async function renderLineChart(datasetKey, passK) {
 }
 
 async function renderTable(datasetKey, passK) {
-  const config = DATASETS[datasetKey];
-  const data = await loadCSV(config.file);
-  const metrics = METRIC_ORDER.filter(m =>
-    data.some(d => d.metric === m)
-  );
-
-  const allModels = [...new Set(data.map(d => d.model))];
-
-  const sizeSlider = document.getElementById("sizeSlider");
-  const maxSize = Number(sizeSlider.value);
-
-  const models = allModels.filter(model => {
-    const params = getModelParams(model);
-    return params <= maxSize;
-  });
-
+  const { metrics, models } = await getPreparedData(datasetKey, passK);
   const tableContainer = document.getElementById("data-table");
 
   let html = '<table><thead><tr><th>Model</th>';
@@ -141,15 +151,16 @@ async function renderTable(datasetKey, passK) {
   });
   html += '</tr></thead><tbody>';
 
-  models.forEach(model => {
-    const params = getModelParams(model);
-    const modelColor = getModelColor(model);
-    html += `<tr><td style="border-left: 4px solid ${modelColor}; padding-left: 8px;"><strong>${model}</strong> (${params}B)</td>`;
+  models.forEach(m => {
+    html += `
+      <tr>
+        <td style="border-left: 4px solid ${m.color}; padding-left: 8px;">
+          <strong>${m.model}</strong> (${m.params}B)
+        </td>
+    `;
 
-    metrics.forEach(metric => {
-      const rate = data.find(d => d.model === model && d.metric === metric && d.k === passK)?.rate ?? 0;
-      const percentage = (rate * 100).toFixed(1);
-      html += `<td>${percentage}%</td>`;
+    m.rates.forEach(rate => {
+      html += `<td>${(rate * 100).toFixed(1)}%</td>`;
     });
 
     html += '</tr>';
@@ -158,7 +169,6 @@ async function renderTable(datasetKey, passK) {
   html += '</tbody></table>';
   tableContainer.innerHTML = html;
 }
-
 
 // Slider
 const sizeSlider = document.getElementById("sizeSlider");
