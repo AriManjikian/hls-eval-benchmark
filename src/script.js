@@ -39,6 +39,11 @@ const DATASETS = {
     title: "Pass Rate by Model: Inference Training",
     yAxisLabel: "Pass Rate",
   },
+  agent: {
+    file: "pass_rates_gen_agent.csv",
+    title: "Pass Rate by Model: Agent",
+    yAxisLabel: "Pass Rate",
+  },
 };
 
 async function loadCSV(file) {

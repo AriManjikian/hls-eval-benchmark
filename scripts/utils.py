@@ -8,7 +8,7 @@ def pass_at_k(n: int, c: int, k: int) -> float:
     return float(1.0 - np.prod(1.0 - k / np.arange(n - c + 1, n + 1)))
 
 
-def compute_pass_rates(df: pd.DataFrame, ks=[1, 5]):
+def compute_pass_rates(df: pd.DataFrame, ks=[1, 5, 10, 20, 40]):
     _models = df["model_name"].unique()
     _eval_ids = df["eval_id"].unique()
 
@@ -23,8 +23,10 @@ def compute_pass_rates(df: pd.DataFrame, ks=[1, 5]):
         n_pass_tb = df_group["pass_tb"].sum()
         n_pass_synth = df_group["pass_synth"].sum()
         n_pass_synth_and_tb = (df_group["pass_tb"] & df_group["pass_synth"]).sum()
+        valid_ks = [k for k in ks if k <= n_samples]
+        print(valid_ks)
 
-        for k in ks:
+        for k in valid_ks:
             pass_at_k_parse = pass_at_k(n_samples, n_pass_parse, k)
             pass_at_k_compile = pass_at_k(n_samples, n_pass_compile, k)
             pass_at_k_tb = pass_at_k(n_samples, n_pass_tb, k)

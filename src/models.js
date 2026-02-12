@@ -15,7 +15,15 @@ export const MODEL_INFO = {
   "meta-llama/Llama-3-8b-chat-hf": {
     params_billion: 8,
     color: '#ee6666'
-  }
+  },
+  "openai/gpt-oss-20b": {
+    params_billion: 20,
+    color: '#9900CC',
+  },
+  "openai/gpt-oss-120b": {
+    params_billion: 120,
+    color: '#FFA500',
+  },
 };
 
 export function getModelParams(modelName) {
