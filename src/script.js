@@ -4,8 +4,8 @@ const METRIC_ORDER = [
   "pass_parse",
   "pass_compile",
   "pass_tb",
+  "pass_synth",
   "pass_synth_and_tb",
-  "pass_synth"
 ];
 
 const DATASETS = {
