@@ -8,7 +8,7 @@ def pass_at_k(n: int, c: int, k: int) -> float:
     return float(1.0 - np.prod(1.0 - k / np.arange(n - c + 1, n + 1)))
 
 
-def compute_pass_rates(df: pd.DataFrame, ks=[1, 5, 10, 20, 40]):
+def compute_pass_rates(df: pd.DataFrame, ks=range(1, 41)):
     _models = df["model_name"].unique()
     _eval_ids = df["eval_id"].unique()
 

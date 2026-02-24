@@ -12,9 +12,51 @@ h1 {
   font-weight: 600;
 }
 
-.subtitle {
-  font-size: 0.95rem;
-  color: #555;
+.section-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  border-bottom: 2px solid #222;
+  width: 100%;
+  max-width: 900px;
+}
+
+.section-tab {
+  padding: 10px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-bottom: none;
+  background: transparent;
+  color: #888;
+  margin-bottom: -2px;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  user-select: none;
+}
+
+.section-tab:hover {
+  color: #222;
+}
+
+.section-tab.active {
+  color: #111;
+  background: #fff;
+  border-color: #222;
+}
+
+.dataset-section {
+  display: none;
+  width: 100%;
+  max-width: 900px;
+  padding: 18px 0 4px 0;
+}
+
+.dataset-section.active {
+  display: block;
 }
 
 .btn-container {
@@ -29,10 +71,6 @@ h1 {
 .btn-container .btn {
   font-size: 0.85rem;
   margin: 0;
-}
-
-.btn-group .btn {
-  font-size: 0.85rem;
 }
 
 .chart-card {

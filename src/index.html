@@ -18,63 +18,73 @@
 
     <h1 class="mt-4">HLS-Eval Benchmark</h1>
 
-    <div class="btn-container" id="datasetButtons">
-      <input type="radio" class="btn-check" name="dataset" id="main-1" value="main-1" checked>
-      <label class="btn btn-outline-dark" for="main-1">Main pass@1</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="main-5" value="main-5">
-      <label class="btn btn-outline-dark" for="main-5">Main pass@5</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="dataflow-1" value="dataflow-1">
-      <label class="btn btn-outline-dark" for="dataflow-1">Dataflow pass@1</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="dataflow-5" value="dataflow-5">
-      <label class="btn btn-outline-dark" for="dataflow-5">Dataflow pass@5</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="loop_tile-1" value="loop_tile-1">
-      <label class="btn btn-outline-dark" for="loop_tile-1">Loop Tile pass@1</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="loop_tile-5" value="loop_tile-5">
-      <label class="btn btn-outline-dark" for="loop_tile-5">Loop Tile pass@5</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="label-1" value="label-1">
-      <label class="btn btn-outline-dark" for="label-1">Label pass@1</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="label-5" value="label-5">
-      <label class="btn btn-outline-dark" for="label-5">Label pass@5</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="inference-1" value="inference-1">
-      <label class="btn btn-outline-dark" for="inference-1">Inference pass@1</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="inference-5" value="inference-5">
-      <label class="btn btn-outline-dark" for="inference-5">Inference pass@5</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="inference-10" value="inference-10">
-      <label class="btn btn-outline-dark" for="inference-10">Inference pass@10</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="inference-20" value="inference-20">
-      <label class="btn btn-outline-dark" for="inference-20">Inference pass@20</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="inference-40" value="inference-40">
-      <label class="btn btn-outline-dark" for="inference-40">Inference pass@40</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="fpx-1" value="fpx-1">
-      <label class="btn btn-outline-dark" for="fpx-1">FPX pass@1</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="fpx-5" value="fpx-5">
-      <label class="btn btn-outline-dark" for="fpx-5">FPX pass@5</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="agent-1" value="agent-1">
-      <label class="btn btn-outline-dark" for="agent-1">Agent pass@1</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="agent-5" value="agent-5">
-      <label class="btn btn-outline-dark" for="agent-5">Agent pass@5</label>
-
-      <input type="radio" class="btn-check" name="dataset" id="agent-10" value="agent-10">
-      <label class="btn btn-outline-dark" for="agent-10">Agent pass@10</label>
-
+    <div class="section-tabs" id="sectionTabs">
+      <button class="section-tab active" data-section="zero-shot">Zero-Shot Generation</button>
+      <button class="section-tab" data-section="inference">Inference</button>
+      <button class="section-tab" data-section="agents">Agents</button>
     </div>
+
+    <div class="dataset-section active" id="section-zero-shot">
+      <div class="btn-container" id="datasetButtons-zero-shot">
+
+        <input type="radio" class="btn-check" name="dataset" id="main-1" value="main-1" checked>
+        <label class="btn btn-outline-dark" for="main-1">Main pass@1</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="main-5" value="main-5">
+        <label class="btn btn-outline-dark" for="main-5">Main pass@5</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="dataflow-1" value="dataflow-1">
+        <label class="btn btn-outline-dark" for="dataflow-1">Dataflow pass@1</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="dataflow-5" value="dataflow-5">
+        <label class="btn btn-outline-dark" for="dataflow-5">Dataflow pass@5</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="loop_tile-1" value="loop_tile-1">
+        <label class="btn btn-outline-dark" for="loop_tile-1">Loop Tile pass@1</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="loop_tile-5" value="loop_tile-5">
+        <label class="btn btn-outline-dark" for="loop_tile-5">Loop Tile pass@5</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="label-1" value="label-1">
+        <label class="btn btn-outline-dark" for="label-1">Label pass@1</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="label-5" value="label-5">
+        <label class="btn btn-outline-dark" for="label-5">Label pass@5</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="fpx-1" value="fpx-1">
+        <label class="btn btn-outline-dark" for="fpx-1">FPX pass@1</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="fpx-5" value="fpx-5">
+        <label class="btn btn-outline-dark" for="fpx-5">FPX pass@5</label>
+
+      </div>
+    </div>
+
+    <div class="dataset-section" id="section-inference">
+      <div class="btn-container" id="datasetButtons-inference">
+
+        <input type="radio" class="btn-check" name="dataset" id="inference" value="inference">
+        <label class="btn btn-outline-dark" for="inference">Inference</label>
+      </div>
+    </div>
+
+    <div class="dataset-section" id="section-agents">
+      <div class="btn-container" id="datasetButtons-agents">
+
+        <input type="radio" class="btn-check" name="dataset" id="agent-1" value="agent-1">
+        <label class="btn btn-outline-dark" for="agent-1">Agent pass@1</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="agent-5" value="agent-5">
+        <label class="btn btn-outline-dark" for="agent-5">Agent pass@5</label>
+
+        <input type="radio" class="btn-check" name="dataset" id="agent-10" value="agent-10">
+        <label class="btn btn-outline-dark" for="agent-10">Agent pass@10</label>
+
+      </div>
+    </div>
+
     <div id="line-chart" class="chart-card"></div>
+
     <div style="margin: 20px 0; text-align: center;">
       <label for="sizeSlider" style="display: block; margin-bottom: 10px;">
         Max Model Size: <span id="sizeValue">671</span>B params
@@ -82,7 +92,11 @@
       <input type="range" id="sizeSlider" style="width: 300px;" />
     </div>
     <div id="data-table" style="margin: 20px 0; overflow-x: auto;"></div>
+
   </div>
+
+  <script>
+  </script>
 </body>
 
 </html>
